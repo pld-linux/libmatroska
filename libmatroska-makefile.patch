@@ -1,23 +1,25 @@
---- libmatroska-0.7.4/make/linux/Makefile.orig	2004-07-19 18:43:44.000000000 +0200
-+++ libmatroska-0.7.4/make/linux/Makefile	2004-11-07 14:15:22.241711016 +0100
-@@ -30,12 +30,14 @@
+--- libmatroska-0.7.5/make/linux/Makefile.orig	2005-02-06 19:12:08.000000000 +0100
++++ libmatroska-0.7.5/make/linux/Makefile	2005-02-27 20:16:53.467608880 +0100
+@@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
  INSTALL_DIR_OPTS = -m 755
 +LIBTOOL = libtool
-+
-+LIBEBML_INCLUDE_DIR=
-+LIBEBML_LIB_DIR=
  
+ ifneq (,$(shell $(CXX) -v 2>&1 | tail -n 1 | grep -i mingw))
+ $(error Please use the Makefile in ../mingw32)
+@@ -36,8 +37,8 @@
  CWD=$(shell pwd)
  
  # Options
 -LIBEBML_INCLUDE_DIR=$(CWD)/../../../libebml
 -LIBEBML_LIB_DIR=$(CWD)/../../../libebml/make/linux
++LIBEBML_INCLUDE_DIR=
++LIBEBML_LIB_DIR=
  EXTENSION=.cpp
  
  ifeq (yes,$(DEBUG))
-@@ -50,10 +52,10 @@
+@@ -52,10 +53,10 @@
  # Librarires
  INCLUDE=-I$(CWD)/../.. -I$(LIBEBML_INCLUDE_DIR)
  LIBS=
@@ -30,9 +32,9 @@
  
  # source-files
  sources:=$(wildcard ${SRC_DIR}*$(EXTENSION))
-@@ -64,8 +66,8 @@
- # files holding dependency information; replace .cxx extension with .dep
- dependencies:=$(patsubst %$(EXTENSION),%.dep,$(sources))
+@@ -63,8 +64,8 @@
+ # header files; replace .cxx extension with .h
+ headers:=$(patsubst %$(EXTENSION),%.h,$(sources))
  
 -# object files; replace .cxx extension with .o
 -objects:=$(patsubst %$(EXTENSION),%.o,$(sources))
@@ -41,7 +43,7 @@
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -D_GNU_SOURCE \
  		-Wshadow
-@@ -78,12 +80,11 @@
+@@ -77,12 +78,11 @@
  lib library: $(LIBRARY)
  
  # Build rules
@@ -57,8 +59,8 @@
  
  clean:	cleantest
  	rm -f $(objects)
-@@ -101,33 +102,33 @@
- test: test6 test8 test9
+@@ -108,33 +108,33 @@
+ test: test6 test9
  
  test6:	test6.o $(LIBRARY)
 -	$(LD) -o $@ $(LINKFLAGS) $< $(MUX_LIBS)
@@ -99,4 +101,4 @@
 +		$(INSTALL) $(INSTALL_OPTS) $$i $(DESTDIR)$(includedir)/c ; \
  	done
  
- # DO NOT DELETE
+ ifneq ($(wildcard .depend),)
