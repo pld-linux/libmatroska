@@ -1,0 +1,12 @@
+diff -urN aa/libmatroska-0.6.3/matroska/KaxConfig.h libmatroska-0.6.3/matroska/KaxConfig.h
+--- aa/libmatroska-0.6.3/matroska/KaxConfig.h	2004-01-17 22:40:47.000000000 +0100
++++ libmatroska-0.6.3/matroska/KaxConfig.h	2004-01-20 22:29:19.081253392 +0100
+@@ -78,7 +78,7 @@
+ #endif
+ 
+ #if !defined(MATROSKA_VERSION)
+-#define MATROSKA_VERSION  1
++#define MATROSKA_VERSION  2
+ #endif // MATROSKA_VERSION
+ 
+ 
