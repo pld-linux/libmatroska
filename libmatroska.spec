@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libmatroska
 Version:	0.4.4
 Release:	1
-License:	GPL/QPL
+License:	GPL v2 or QPL
 Group:		Libraries
 Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	1d855dc5d7a16d562efcac53f9cbdf7b
