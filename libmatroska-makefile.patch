@@ -1,0 +1,56 @@
+--- libmatroska-0.4.4/make/linux/Makefile.dakh	2003-06-13 20:53:15.000000000 +0200
++++ libmatroska-0.4.4/make/linux/Makefile	2003-06-29 19:08:02.000000000 +0200
+@@ -29,8 +29,8 @@
+ CWD=$(shell pwd)
+ 
+ # Options
+-LIBEBML_INCLUDE_DIR=$(CWD)/../../../libebml/src
+-LIBEBML_LIB_DIR=$(CWD)/../../../libebml/make/linux
++LIBEBML_INCLUDE_DIR=
++LIBEBML_LIB_DIR=
+ EXTENSION=.cpp
+ 
+ SYSTEM  := $(shell uname -s)
+@@ -54,7 +54,7 @@
+ MUX_LIBS=-lmatroska -lebml $(LIBICONV)
+ 
+ # Names
+-LIBRARY=libmatroska.a
++LIBRARY=libmatroska
+ 
+ # source-files
+ sources:=$(wildcard ${SRC_DIR}*$(EXTENSION))
+@@ -70,7 +70,7 @@
+ 
+ DEPENDFLAGS  = ${CXXFLAGS} ${INCLUDE}
+ 
+-all: $(LIBRARY) test
++all: $(LIBRARY)
+ 
+ lib library: $(LIBRARY)
+ 
+@@ -79,10 +79,10 @@
+ 	$(CXX) -c $(CXXFLAGS) $(INCLUDE) -o $@ $<
+ 
+ $(LIBRARY): $(objects)
+-	$(AR) $@ $(objects)
+-	$(RANLIB) $@
+-#	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
+-#	${LD} -o $@ ${LDFLAGS} ${OBJS} ${LIBS} ${EXTRA_LIBS}
++	$(AR) $@.a $(objects)
++	$(RANLIB) $@.a
++	$(LD) $(LDFLAGS) -o $@.so $^ $(LIBS)
++
+ 
+ clean:	cleantest
+ 	rm -f $(objects)
+@@ -113,7 +113,8 @@
+ 
+ install: $(LIBRARY)
+ 	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
+-	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(libdir)
++	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY).a $(libdir)
++	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY).so $(libdir)
+ 	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)
+ 	for i in $(SRC_DIR)/*.h; do \
+ 		$(INSTALL) $(INSTALL_OPTS) $$i $(includedir) ; \
