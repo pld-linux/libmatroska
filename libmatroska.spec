@@ -8,89 +8,75 @@ Group:		Libraries
 Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	1d855dc5d7a16d562efcac53f9cbdf7b
 Patch0:		%{name}-makefile.patch
-URL:		http://www.matroska.org
+URL:		http://www.matroska.org/
+BuildRequires:	libebml-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Matroska is an extensible open standard Audio/Video container format, 
-aiming to become the standard of Multimedia
-Container Formats one day. It is based on EBML (Extensible Binary
-Meta Language), a kind of binary version of XML. This way the
-significant advantages in terms of future format extensability
-are gained without breaking file support in old parsers.
+Matroska is an extensible open standard Audio/Video container format,
+aiming to become the standard of Multimedia Container Formats one day.
+It is based on EBML (Extensible Binary Meta Language), a kind of
+binary version of XML. This way the significant advantages in terms of
+future format extensibility are gained without breaking file support
+in old parsers.
 
 %description -l pl
 Matroska to rozszerzalny otwarty format kodowania d¼wiêku i obrazu,
-d±¿±cy do stania sie. Jest on oparty na EBML (rozszerzalny metajêzyk 
-binarny), binarnym odpowiedniku XML. W ten sposób ma on przewagê nad 
+d±¿±cy do stania siê pewnego dnia standardem formatów zawieraj±cych
+multimedia. Jest on oparty na EBML (rozszerzalnym metajêzyku
+binarnym), binarnym odpowiedniku XML. W ten sposób ma on przewagê nad
 innymi formatami pod wzglêdem przysz³ej rozszerzalno¶ci przy
 jednoczesnym zachowaniu kompatybilno¶ci wstecz.
 
 %package devel
-Summary:	Developmment files and headers for matroska
-Summary(pl):	Nag³ówki dla matroski
+Summary:	Header files for matroska library
+Summary(pl):	Nag³ówki dla biblioteki matroska
 Group:		Development/Libraries
-Requires:       %{name} >= %{version}
+Requires:	%{name} = %{version}
+Requires:	libstdc++-devel
 
 %description devel
-Developmment files and headers for matroska.
+Header files for matroska library.
 
 %description devel -l pl
-Nag³ówki dla matroski.
+Nag³ówki dla biblioteki matroska.
 
 %package static
-Summary:        Static libraries for Extensible Binary Meta Language
-Summary(pl):   	Biblioteki statyczne dla rozszerzalnego metajêzyka binarnego
-Group:          Libraries
+Summary:	Static version of matroska library
+Summary(pl):	Statyczna wersja biblioteki matroska
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}
 
 %description static
-Static libraries for matroska.
+Static version of matroska library.
 
 %description static -l pl
-Biblioteki statyczne dla matroski.
+Statyczna wersja biblioteki matroska.
 
 %prep
 %setup -q 
 %patch0 -p1
 
 %build
-cd make/linux
-%{__make} clean
-%{__make} \
+%{__make} -C make/linux \
 	prefix=%{_prefix} \
-	CXX=%{__cxx} \
-	LD=%{__cxx} \
-	AR="%{__ar} rcvu"  \
-	RANLIB=%{__ranlib} \
-	INSTALL=%{__install} \
-	CXXFLAGS="%{rpmcflags}" \
-	%{?debug:DEBUG=yes} \
-	INSTALL_OPTS="" \
-	INSTALL_OPTS_LIB="" \
-	INSTALL_DIR_OPTS="" \
-	LDFLAGS="-shared -lebml -L. -L%{_libdir}"\
-	LIBEBML_INCLUDE_DIR="%{_includedir}/ebml/" \
-	SRC_DIR=%{_builddir}/%{name}-%{version}/src/
+	CXX="%{__cxx}" \
+	LD="%{__cxx}" \
+	DEBUGFLAGS="%{rpmcflags} %{?debug:-DDEBUG}" \
+	LDFLAGS="%{rpmldflags}" \
+	LIBEBML_INCLUDE_DIR="%{_includedir}/ebml"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
 
-%{__make} -f make/linux/Makefile install \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	CXX=%{__cxx} \
-	LD=%{__cxx} \
-	AR="%{__ar} rcvu"  \
-	RANLIB=%{__ranlib} \
-	INSTALL=%{__install} \
-	%{?debug:DEBUG=yes} \
-	INSTALL_OPTS="" \
-	INSTALL_OPTS_LIB="" \
-	INSTALL_DIR_OPTS="" \
-	SRC_DIR=%{_builddir}/%{name}-%{version}/src/\
-	LDFLAGS="-shared -lebml -L. -L%{_libdir}" \
-	LIBEBML_INCLUDE_DIR="%{_includedir}/ebml/" \
-	CXXFLAGS="%{rpmcflags}"
+%{__make} -C make/linux install \
+	prefix=$RPM_BUILD_ROOT%{_prefix}
+
+# prepare docs (with working hyperlinks)
+install -d doc
+cp --parents src/api/index.html src/api/c/index.html doc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -100,10 +86,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libmatroska.so
+%attr(755,root,root) %{_libdir}/libmatroska.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
+%doc doc/src/api/*
+%attr(755,root,root) %{_libdir}/libmatroska.so
+%{_libdir}/libmatroska.la
 %{_includedir}/matroska
 
 %files static
