@@ -27,8 +27,8 @@ in old parsers.
 Matroska to rozszerzalny otwarty format kodowania d¼wiêku i obrazu,
 d±¿±cy do stania siê pewnego dnia standardem formatów zawieraj±cych
 multimedia. Jest on oparty na EBML (rozszerzalnym metajêzyku
-binarnym), binarnym odpowiedniku XML. W ten sposób ma on przewagê nad
-innymi formatami pod wzglêdem przysz³ej rozszerzalno¶ci przy
+binarnym), binarnym odpowiedniku XML-a. W ten sposób ma on przewagê
+nad innymi formatami pod wzglêdem przysz³ej rozszerzalno¶ci przy
 jednoczesnym zachowaniu kompatybilno¶ci wstecz.
 
 %package devel
