@@ -1,15 +1,15 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libmatroska
-Version:	0.5.2
+Version:	0.6.1
 Release:	1
 License:	GPL v2 or QPL
 Group:		Libraries
 Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	bcad636446f56a7f7e3ba50d0a6ec282
+# Source0-md5:	61d5665e7c1050aa934aecc57cf392cd
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
-BuildRequires:	libebml-devel
+BuildRequires:	libebml-devel >= 0.6.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -35,6 +35,7 @@ Summary:	Header files for matroska library
 Summary(pl):	Nag³ówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Requires:	libebml-devel >= 0.6.2
 Requires:	libstdc++-devel
 
 %description devel
@@ -56,8 +57,8 @@ Static version of matroska library.
 Statyczna wersja biblioteki matroska.
 
 %prep
-%setup -q -n %{name}
-%patch0 -p1 -b .djurban
+%setup -q
+%patch0 -p1
 
 %build
 %{__make} -C make/linux \
@@ -86,6 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc ChangeLog.txt
 %attr(755,root,root) %{_libdir}/libmatroska.so.*.*.*
 
 %files devel
