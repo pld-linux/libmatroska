@@ -3,9 +3,9 @@ Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libmatroska
 Version:	0.7.4
 Release:	1
-License:	GPL v2 or QPL
+License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://dl.matroska.org/downloads/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.bz2
 # Source0-md5:	a91b7a30141122edb02f9e42bbae69d9
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-version_define.patch
@@ -13,6 +13,7 @@ URL:		http://www.matroska.org/
 BuildRequires:	libebml-devel >= 0.7.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+Requires:	libebml >= 0.7.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
