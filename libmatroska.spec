@@ -18,19 +18,17 @@ Container Formats one day. It is based on EBML (Extensible Binary
 Meta Language), a kind of binary version of XML. This way the
 significant advantages in terms of future format extensability
 are gained without breaking file support in old parsers.
-     
-   
+
 %description -l pl
 Matroska to rozszerzalny otwarty format kodowania d¼wiêku i obrazu,
 d±¿±cy do stania sie. Jest on oparty na EBML (rozszerzalny metajêzyk 
 binarny), binarnym odpowiedniku XML. W ten sposób ma on przewagê nad 
-innymi formatami pod wzglêdem przysz³ej rozszerzalno¶ci przy jendoczesnym
-zachowaniu kompatybilno¶ci wstecz.
-
+innymi formatami pod wzglêdem przysz³ej rozszerzalno¶ci przy
+jednoczesnym zachowaniu kompatybilno¶ci wstecz.
 
 %package devel
-Summary:	Developmment files and headers for matroska.
-Summary(pl):	Nag³ówki dla matroski.
+Summary:	Developmment files and headers for matroska
+Summary(pl):	Nag³ówki dla matroski
 Group:		Development/Libraries
 Requires:       %{name} >= %{version}
 
@@ -41,8 +39,8 @@ Developmment files and headers for matroska.
 Nag³ówki dla matroski.
 
 %package static
-Summary:        Static libraries for Extensible Binary Meta Language.
-Summary(pl):   	Biblioteki statyczne dla rozszerzalnego metajêzyka binarnego.
+Summary:        Static libraries for Extensible Binary Meta Language
+Summary(pl):   	Biblioteki statyczne dla rozszerzalnego metajêzyka binarnego
 Group:          Libraries
 
 %description static
@@ -53,12 +51,13 @@ Biblioteki statyczne dla matroski.
 
 %prep
 %setup -q 
-%patch0 -p1 -b .dakh
+%patch0 -p1
 
 %build
 cd make/linux
 %{__make} clean
-%{__make}  prefix=%{_prefix} \
+%{__make} \
+	prefix=%{_prefix} \
 	CXX=%{__cxx} \
 	LD=%{__cxx} \
 	AR="%{__ar} rcvu"  \
@@ -77,7 +76,8 @@ cd make/linux
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{__make} -f make/linux/Makefile prefix=$RPM_BUILD_ROOT%{_prefix} install \
+%{__make} -f make/linux/Makefile install \
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	CXX=%{__cxx} \
 	LD=%{__cxx} \
 	AR="%{__ar} rcvu"  \
@@ -91,23 +91,20 @@ install -d $RPM_BUILD_ROOT
 	LDFLAGS="-shared -lebml -L. -L%{_libdir}" \
 	LIBEBML_INCLUDE_DIR="%{_includedir}/ebml/" \
 	CXXFLAGS="%{rpmcflags}"
-	
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files 
 %defattr(644,root,root,755)
-%{_libdir}/libmatroska.so
+%attr(755,root,root) %{_libdir}/libmatroska.so
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/matroska/
+%{_includedir}/matroska
 
 %files static
 %defattr(644,root,root,755)
