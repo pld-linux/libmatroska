@@ -63,6 +63,7 @@ Statyczna wersja biblioteki matroska.
 %build
 %{__make} -C make/linux \
 	prefix=%{_prefix} \
+	libdir=%{_libdir} \
 	CXX="%{__cxx}" \
 	LD="%{__cxx}" \
 	DEBUGFLAGS="%{rpmcflags} %{?debug:-DDEBUG}" \
@@ -73,7 +74,8 @@ Statyczna wersja biblioteki matroska.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C make/linux install \
-	prefix=$RPM_BUILD_ROOT%{_prefix}
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
+	libdir=$RPM_BUILD_ROOT%{_libdir}
 
 # prepare docs (with working hyperlinks)
 #install -d doc
