@@ -1,12 +1,12 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libmatroska
-Version:	0.4.4
+Version:	0.5.0
 Release:	1
 License:	GPL v2 or QPL
 Group:		Libraries
-Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	1d855dc5d7a16d562efcac53f9cbdf7b
+Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	9466e83c1f150a84fe5408f426eea041
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
 BuildRequires:	libebml-devel
@@ -56,8 +56,8 @@ Static version of matroska library.
 Statyczna wersja biblioteki matroska.
 
 %prep
-%setup -q
-%patch0 -p1
+%setup -q -n %{name}
+%patch0 -p1 -b .djurban
 
 %build
 %{__make} -C make/linux \
@@ -75,8 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 	prefix=$RPM_BUILD_ROOT%{_prefix}
 
 # prepare docs (with working hyperlinks)
-install -d doc
-cp --parents src/api/index.html src/api/c/index.html doc
+#install -d doc
+#cp --parents src/api/index.html src/api/c/index.html doc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -90,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/src/api/*
+##%doc doc/src/api/*
 %attr(755,root,root) %{_libdir}/libmatroska.so
 %{_libdir}/libmatroska.la
 %{_includedir}/matroska
