@@ -35,7 +35,7 @@ jednoczesnym zachowaniu kompatybilno¶ci wstecz.
 Summary:	Header files for matroska library
 Summary(pl):	Nag³ówki dla biblioteki matroska
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	libebml-devel >= 0.6.4
 Requires:	libstdc++-devel
 
@@ -49,7 +49,7 @@ Nag³ówki dla biblioteki matroska.
 Summary:	Static version of matroska library
 Summary(pl):	Statyczna wersja biblioteki matroska
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of matroska library.
