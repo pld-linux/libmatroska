@@ -1,19 +1,19 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libmatroska
-Version:	0.7.5
+Version:	0.7.6
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.bz2
-# Source0-md5:	8f034dc9253dbb1f8a214dafa12785ae
+# Source0-md5:	2c9ae5b7d72767b9c23fca6ecf3681e7
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-version_define.patch
 URL:		http://www.matroska.org/
-BuildRequires:	libebml-devel >= 0.7.3
+BuildRequires:	libebml-devel >= 0.7.4
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-Requires:	libebml >= 0.7.3
+Requires:	libebml >= 0.7.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,7 +37,7 @@ Summary:	Header files for matroska library
 Summary(pl):	Nag³ówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libebml-devel >= 0.7.3
+Requires:	libebml-devel >= 0.7.4
 Requires:	libstdc++-devel
 
 %description devel
