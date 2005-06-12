@@ -1,5 +1,5 @@
---- libmatroska-0.7.6/make/linux/Makefile.orig	2005-04-16 13:29:02.000000000 +0200
-+++ libmatroska-0.7.6/make/linux/Makefile	2005-04-24 01:13:24.741389560 +0200
+--- libmatroska-0.7.7/make/linux/Makefile.orig	2005-04-19 09:00:00.000000000 +0200
++++ libmatroska-0.7.7/make/linux/Makefile	2005-06-12 21:27:18.499321560 +0200
 @@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -47,17 +47,18 @@
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -D_GNU_SOURCE \
  		-Wshadow
-@@ -76,30 +73,18 @@
- LINKFLAGS=-L. -L$(LIBEBML_LIB_DIR) $(LDFLAGS)
- DEPENDFLAGS  = $(CXXFLAGS) $(INCLUDE)
- 
+@@ -79,31 +76,19 @@
+ ifeq (Darwin,$(shell uname -s))
+ all: staticlib
+ else
 -all: staticlib sharedlib
--
++all: $(LIBRARY)
+ endif
+ 
 -staticlib: $(LIBRARY)
 -
 -sharedlib: $(LIBRARY_SO)
-+all: $(LIBRARY)
- 
+-
  lib:
  	@echo "Use the 'staticlib', 'sharedlib' or 'all' targets."
  	@false
@@ -81,7 +82,7 @@
  
  clean:	cleantest
  	rm -f $(objects) $(objects_so)
-@@ -127,43 +112,38 @@
+@@ -131,19 +116,19 @@
  test: test6 test9
  
  test6:	test6.o $(LIBRARY) $(LIBRARY_SO)
@@ -104,9 +105,13 @@
  
  test9.o: $(TAG_SRC_DIR)test9.cpp
  	$(CXX) -c $(COMPILEFLAGS) -o $@ $<
- 
+@@ -151,27 +136,22 @@
+ ifeq (Darwin,$(shell uname -s))
+ install: install_staticlib install_headers
+ else
 -install: install_staticlib install_sharedlib install_headers
 +install: install_lib install_headers
+ endif
  
  install_headers:
 -	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)
