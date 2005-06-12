@@ -1,12 +1,12 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libmatroska
-Version:	0.7.6
+Version:	0.7.7
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.bz2
-# Source0-md5:	2c9ae5b7d72767b9c23fca6ecf3681e7
+# Source0-md5:	801a81baaa970595b3e9692ec4dd12f9
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-version_define.patch
 URL:		http://www.matroska.org/
