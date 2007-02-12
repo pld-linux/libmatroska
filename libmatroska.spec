@@ -1,5 +1,5 @@
 Summary:	Extensible Binary Meta Language access library
-Summary(pl):	Biblioteka dostÍpu rozszerzalnego metajÍzyka binarnego
+Summary(pl.UTF-8):   Biblioteka dostƒôpu rozszerzalnego metajƒôzyka binarnego
 Name:		libmatroska
 Version:	0.8.0
 Release:	1
@@ -23,17 +23,17 @@ binary version of XML. This way the significant advantages in terms of
 future format extensibility are gained without breaking file support
 in old parsers.
 
-%description -l pl
-Matroska to rozszerzalny otwarty format kodowania dºwiÍku i obrazu,
-d±ø±cy do stania siÍ pewnego dnia standardem formatÛw zawieraj±cych
-multimedia. Jest on oparty na EBML (rozszerzalnym metajÍzyku
-binarnym), binarnym odpowiedniku XML-a. W ten sposÛb ma on przewagÍ
-nad innymi formatami pod wzglÍdem przysz≥ej rozszerzalno∂ci przy
-jednoczesnym zachowaniu kompatybilno∂ci wstecz.
+%description -l pl.UTF-8
+Matroska to rozszerzalny otwarty format kodowania d≈∫wiƒôku i obrazu,
+dƒÖ≈ºƒÖcy do stania siƒô pewnego dnia standardem format√≥w zawierajƒÖcych
+multimedia. Jest on oparty na EBML (rozszerzalnym metajƒôzyku
+binarnym), binarnym odpowiedniku XML-a. W ten spos√≥b ma on przewagƒô
+nad innymi formatami pod wzglƒôdem przysz≈Çej rozszerzalno≈õci przy
+jednoczesnym zachowaniu kompatybilno≈õci wstecz.
 
 %package devel
 Summary:	Header files for matroska library
-Summary(pl):	Nag≥Ûwki dla biblioteki matroska
+Summary(pl.UTF-8):   Nag≈Ç√≥wki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libebml-devel >= 0.7.6
@@ -42,19 +42,19 @@ Requires:	libstdc++-devel
 %description devel
 Header files for matroska library.
 
-%description devel -l pl
-Nag≥Ûwki dla biblioteki matroska.
+%description devel -l pl.UTF-8
+Nag≈Ç√≥wki dla biblioteki matroska.
 
 %package static
 Summary:	Static version of matroska library
-Summary(pl):	Statyczna wersja biblioteki matroska
+Summary(pl.UTF-8):   Statyczna wersja biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of matroska library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja biblioteki matroska.
 
 %prep
