@@ -1,5 +1,5 @@
 Summary:	Extensible Binary Meta Language access library
-Summary(pl.UTF-8):   Biblioteka dostępu rozszerzalnego metajęzyka binarnego
+Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libmatroska
 Version:	0.8.0
 Release:	1
@@ -33,7 +33,7 @@ jednoczesnym zachowaniu kompatybilności wstecz.
 
 %package devel
 Summary:	Header files for matroska library
-Summary(pl.UTF-8):   Nagłówki dla biblioteki matroska
+Summary(pl.UTF-8):	Nagłówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libebml-devel >= 0.7.6
@@ -47,7 +47,7 @@ Nagłówki dla biblioteki matroska.
 
 %package static
 Summary:	Static version of matroska library
-Summary(pl.UTF-8):   Statyczna wersja biblioteki matroska
+Summary(pl.UTF-8):	Statyczna wersja biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
