@@ -1,5 +1,5 @@
---- libmatroska-0.7.7/make/linux/Makefile.orig	2005-04-19 09:00:00.000000000 +0200
-+++ libmatroska-0.7.7/make/linux/Makefile	2005-06-12 21:27:18.499321560 +0200
+--- libmatroska-0.8.1/make/linux/Makefile.orig	2006-06-02 16:32:52.000000000 +0200
++++ libmatroska-0.8.1/make/linux/Makefile	2007-02-17 21:06:58.961639212 +0100
 @@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -47,7 +47,7 @@
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -D_GNU_SOURCE \
  		-Wshadow
-@@ -79,31 +76,19 @@
+@@ -79,32 +76,19 @@
  ifeq (Darwin,$(shell uname -s))
  all: staticlib
  else
@@ -77,12 +77,13 @@
 -
 -$(LIBRARY_SO): $(objects_so)
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
+-	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
 +	$(LIBTOOL) --mode=link $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
  
  clean:	cleantest
  	rm -f $(objects) $(objects_so)
-@@ -131,19 +116,19 @@
+@@ -132,19 +116,19 @@
  test: test6 test9
  
  test6:	test6.o $(LIBRARY) $(LIBRARY_SO)
@@ -105,7 +106,7 @@
  
  test9.o: $(TAG_SRC_DIR)test9.cpp
  	$(CXX) -c $(COMPILEFLAGS) -o $@ $<
-@@ -151,27 +136,22 @@
+@@ -152,27 +136,22 @@
  ifeq (Darwin,$(shell uname -s))
  install: install_staticlib install_headers
  else
@@ -134,7 +135,7 @@
 -install_sharedlib: $(LIBRARY_SO)
 -	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
 -	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY_SO_VER) $(libdir)
--	ln -s $(LIBRARY_SO_VER) $(libdir)/$(LIBRARY_SO)
+-	ln -fs $(LIBRARY_SO_VER) $(libdir)/$(LIBRARY_SO)
 +install_lib: $(LIBRARY)
 +	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(libdir)
 +	$(LIBTOOL) --mode=install $(INSTALL) $(LIBRARY) $(DESTDIR)$(libdir)
