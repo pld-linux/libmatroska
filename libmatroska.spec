@@ -92,6 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_libdir}/libmatroska.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmatroska.so.0
 
 %files devel
 %defattr(644,root,root,755)
