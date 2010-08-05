@@ -1,5 +1,5 @@
---- libmatroska-0.8.1/make/linux/Makefile.orig	2006-06-02 16:32:52.000000000 +0200
-+++ libmatroska-0.8.1/make/linux/Makefile	2007-02-17 21:06:58.961639212 +0100
+--- libmatroska-1.0.0/make/linux/Makefile~	2010-08-05 23:37:39.000000000 +0300
++++ libmatroska-1.0.0/make/linux/Makefile	2010-08-05 23:38:53.361903703 +0300
 @@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -19,7 +19,7 @@
  EXTENSION=.cpp
  
  ifeq (yes,$(DEBUG))
-@@ -52,12 +53,10 @@
+@@ -50,12 +50,10 @@
  # Librarires
  INCLUDE=-I$(CWD)/../.. -I$(LIBEBML_INCLUDE_DIR)
  LIBS=
@@ -29,7 +29,7 @@
  # Names
 -LIBRARY=libmatroska.a
 -LIBRARY_SO=libmatroska.so
--LIBRARY_SO_VER=libmatroska.so.0
+-LIBRARY_SO_VER=libmatroska.so.2
 +LIBRARY=libmatroska.la
  
  # source-files
@@ -47,7 +47,7 @@
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -D_GNU_SOURCE \
  		-Wshadow
-@@ -79,32 +76,19 @@
+@@ -75,32 +73,19 @@
  ifeq (Darwin,$(shell uname -s))
  all: staticlib
  else
@@ -72,14 +72,14 @@
 +	$(LIBTOOL) --mode=compile --tag=CC $(CXX) -c $(COMPILEFLAGS) -o $@ $<
  
  $(LIBRARY): $(objects)
--	$(AR) $@ $(objects)
+-	$(AR) rcvu $@ $(objects)
 -	$(RANLIB) $@
 -
 -$(LIBRARY_SO): $(objects_so)
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 2:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
  
  clean:	cleantest
  	rm -f $(objects) $(objects_so)
