@@ -1,15 +1,15 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libmatroska
-Version:	1.0.0
+Version:	1.1.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.bz2
-# Source0-md5:	4efcf3945b17a6f0320cf1aaa326a4de
+# Source0-md5:	21e5ee3e2573f0ae99db195348bdfb98
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
-BuildRequires:	libebml-devel >= 1.0.0
+BuildRequires:	libebml-devel >= 1.2.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.566
@@ -37,7 +37,7 @@ Summary:	Header files for matroska library
 Summary(pl.UTF-8):	Nagłówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libebml-devel
+Requires:	libebml-devel >= 1.2.0
 Requires:	libstdc++-devel
 
 %description devel
@@ -94,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_libdir}/libmatroska.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmatroska.so.2
+%attr(755,root,root) %ghost %{_libdir}/libmatroska.so.3
 
 %files devel
 %defattr(644,root,root,755)
