@@ -1,14 +1,11 @@
---- libmatroska-1.0.0/make/linux/Makefile~	2010-08-05 23:37:39.000000000 +0300
-+++ libmatroska-1.0.0/make/linux/Makefile	2010-08-05 23:38:53.361903703 +0300
-@@ -28,6 +28,7 @@
+--- libmatroska-1.2.0/make/linux/Makefile.orig	2011-06-30 19:44:13.460706988 +0200
++++ libmatroska-1.2.0/make/linux/Makefile	2011-06-30 19:50:32.134053000 +0200
+@@ -29,12 +29,13 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
  INSTALL_DIR_OPTS = -m 755
 +LIBTOOL = libtool
  
- ifneq (,$(shell $(CXX) -v 2>&1 | tail -n 1 | grep -i mingw))
- $(error Please use the Makefile in ../mingw32)
-@@ -36,8 +37,8 @@
  CWD=$(shell pwd)
  
  # Options
@@ -19,7 +16,7 @@
  EXTENSION=.cpp
  
  ifeq (yes,$(DEBUG))
-@@ -50,12 +50,10 @@
+@@ -49,12 +50,10 @@
  # Librarires
  INCLUDE=-I$(CWD)/../.. -I$(LIBEBML_INCLUDE_DIR)
  LIBS=
@@ -29,12 +26,12 @@
  # Names
 -LIBRARY=libmatroska.a
 -LIBRARY_SO=libmatroska.so
--LIBRARY_SO_VER=libmatroska.so.3
+-LIBRARY_SO_VER=libmatroska.so.4
 +LIBRARY=libmatroska.la
  
  # source-files
  sources:=$(wildcard ${SRC_DIR}*$(EXTENSION))
-@@ -65,10 +64,8 @@
+@@ -62,10 +61,8 @@
  # header files; replace .cxx extension with .h
  headers:=$(patsubst %$(EXTENSION),%.h,$(sources))
  
@@ -47,7 +44,7 @@
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -D_GNU_SOURCE \
  		-Wshadow
-@@ -75,32 +73,19 @@
+@@ -76,32 +73,19 @@
  ifeq (Darwin,$(shell uname -s))
  all: staticlib
  else
@@ -79,11 +76,11 @@
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 3:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 4:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
  
  clean:	cleantest
  	rm -f $(objects) $(objects_so)
-@@ -132,19 +116,19 @@
+@@ -129,19 +113,19 @@
  test: test6 test9
  
  test6:	test6.o $(LIBRARY) $(LIBRARY_SO)
@@ -106,7 +103,7 @@
  
  test9.o: $(TAG_SRC_DIR)test9.cpp
  	$(CXX) -c $(COMPILEFLAGS) -o $@ $<
-@@ -152,27 +136,22 @@
+@@ -149,27 +133,22 @@
  ifeq (Darwin,$(shell uname -s))
  install: install_staticlib install_headers
  else
