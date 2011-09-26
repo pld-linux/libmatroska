@@ -1,5 +1,5 @@
---- libmatroska-1.2.0/make/linux/Makefile.orig	2011-06-30 19:44:13.460706988 +0200
-+++ libmatroska-1.2.0/make/linux/Makefile	2011-06-30 19:50:32.134053000 +0200
+--- libmatroska-1.3.0/make/linux/Makefile.orig	2011-09-26 17:14:10.104527029 +0200
++++ libmatroska-1.3.0/make/linux/Makefile	2011-09-26 17:15:20.211196043 +0200
 @@ -29,12 +29,13 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -26,7 +26,7 @@
  # Names
 -LIBRARY=libmatroska.a
 -LIBRARY_SO=libmatroska.so
--LIBRARY_SO_VER=libmatroska.so.4
+-LIBRARY_SO_VER=libmatroska.so.5
 +LIBRARY=libmatroska.la
  
  # source-files
@@ -76,7 +76,7 @@
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 4:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 5:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
  
  clean:	cleantest
  	rm -f $(objects) $(objects_so)
