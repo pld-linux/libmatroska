@@ -26,7 +26,7 @@
  # Names
 -LIBRARY=libmatroska.a
 -LIBRARY_SO=libmatroska.so
--LIBRARY_SO_VER=libmatroska.so.5
+-LIBRARY_SO_VER=libmatroska.so.6
 +LIBRARY=libmatroska.la
  
  # source-files
@@ -76,7 +76,7 @@
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 5:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 6:0:0 -o $@ $^ $(LIBS) -lebml -rpath $(libdir)
  
  clean:	cleantest
  	rm -f $(objects) $(objects_so)
