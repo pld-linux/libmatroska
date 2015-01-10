@@ -1,20 +1,22 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libmatroska
-Version:	1.4.1
+Version:	1.4.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.bz2
-# Source0-md5:	f61b2e5086f4bb9d24a43cc8af43a719
-Patch0:		%{name}-makefile.patch
+# Source0-md5:	f8fe42003e072a42a19ed40405f9efdb
+Patch0:		%{name}-link.patch
 URL:		http://www.matroska.org/
-BuildRequires:	libebml-devel >= 1.3.0
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
+BuildRequires:	libebml-devel >= 1.3.1
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.566
-#BuildRequires:	sed >= 4.0
-Requires:	libebml >= 1.3.0
+Requires:	libebml >= 1.3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -38,7 +40,7 @@ Summary:	Header files for matroska library
 Summary(pl.UTF-8):	Nagłówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libebml-devel >= 1.3.0
+Requires:	libebml-devel >= 1.3.1
 Requires:	libstdc++-devel
 
 %description devel
@@ -61,29 +63,24 @@ Statyczna wersja biblioteki matroska.
 
 %prep
 %setup -q
-%undos make/linux/Makefile
 %patch0 -p1
 
 %build
-%{__make} -C make/linux \
-	prefix=%{_prefix} \
-	libdir=%{_libdir} \
-	CXX="%{__cxx}" \
-	LD="%{__cxx}" \
-	DEBUGFLAGS="%{rpmcflags} %{?debug:-DDEBUG}" \
-	LDFLAGS="%{rpmldflags}" \
-	LIBEBML_INCLUDE_DIR="%{_includedir}/ebml"
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	%{?debug:--enable-debug}
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C make/linux install \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	libdir=$RPM_BUILD_ROOT%{_libdir}
-
-# prepare docs (with working hyperlinks)
-#install -d doc
-#cp --parents src/api/index.html src/api/c/index.html doc
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,10 +96,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-##%doc doc/src/api/*
 %attr(755,root,root) %{_libdir}/libmatroska.so
 %{_libdir}/libmatroska.la
 %{_includedir}/matroska
+%{_pkgconfigdir}/libmatroska.pc
 
 %files static
 %defattr(644,root,root,755)
