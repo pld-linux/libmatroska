@@ -5,19 +5,19 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libmatroska
-Version:	1.4.9
+Version:	1.5.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.xz
-# Source0-md5:	cb1671e4045e1f36c7e055baba7af9d5
+# Source0-md5:	df59a50db89296cad8662abf596355a9
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
-BuildRequires:	libebml-devel >= 1.3.5
+BuildRequires:	libebml-devel >= 1.3.9
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.605
-Requires:	libebml >= 1.3.5
+Requires:	libebml >= 1.3.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,7 +41,7 @@ Summary:	Header files for matroska library
 Summary(pl.UTF-8):	Nagłówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libebml-devel >= 1.3.5
+Requires:	libebml-devel >= 1.3.9
 Requires:	libstdc++-devel
 
 %description devel
@@ -115,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmatroska.so
 %{_includedir}/matroska
 %{_pkgconfigdir}/libmatroska.pc
-%{_libdir}/cmake/matroska
+%{_libdir}/cmake/Matroska
 
 %if %{with static_libs}
 %files static
