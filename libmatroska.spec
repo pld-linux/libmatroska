@@ -5,21 +5,21 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libmatroska
-Version:	1.6.3
-Release:	2
+Version:	1.7.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.xz
-# Source0-md5:	d3ac01c6b27d99e820351d07d29a089d
+# Source0-md5:	8904c2408b7fb3fe2cc3eb1fdfdddd81
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
-BuildRequires:	libebml-devel >= 1.4.2
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libebml-devel >= 1.4.3
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	libebml >= 1.4.2
+Requires:	libebml >= 1.4.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,7 +43,7 @@ Summary:	Header files for matroska library
 Summary(pl.UTF-8):	Nagłówki dla biblioteki matroska
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libebml-devel >= 1.4.0
+Requires:	libebml-devel >= 1.4.3
 Requires:	libstdc++-devel >= 6:4.7
 
 %description devel
@@ -108,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README.md
+%doc NEWS.md README.md
 %attr(755,root,root) %{_libdir}/libmatroska.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmatroska.so.7
 
