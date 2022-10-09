@@ -5,12 +5,12 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libmatroska
-Version:	1.7.0
+Version:	1.7.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://dl.matroska.org/downloads/libmatroska/%{name}-%{version}.tar.xz
-# Source0-md5:	8904c2408b7fb3fe2cc3eb1fdfdddd81
+# Source0-md5:	576ca1b6d2661f328a42192124135e86
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
 BuildRequires:	libebml-devel >= 1.4.3
